@@ -1,24 +1,25 @@
-# README
+# PS3 Game Manager
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Rails 8 app for tracking PS3 `.iso` and `.pkg` backups stored on a NAS.
 
-Things you may want to cover:
+## Local setup
 
-* Ruby version
+```bash
+bundle install
+bin/rails db:prepare
+bin/dev
+```
 
-* System dependencies
+## Running tests
 
-* Configuration
+```bash
+bin/rails test
+bin/rails test:system
+```
 
-* Database creation
+## Docker deployment
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+1. Mount the NAS share on the Raspberry Pi host at `/mnt/ps3`.
+2. Set a real `SECRET_KEY_BASE` in `docker-compose.yml` or an `.env` file.
+3. Start the app with `docker compose up --build -d`.
+4. Open `http://<pi-address>:3000`.

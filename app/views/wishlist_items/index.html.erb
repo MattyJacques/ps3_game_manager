@@ -1,0 +1,30 @@
+<div class="mx-auto max-w-5xl space-y-6 px-4 py-8">
+  <header class="flex items-center justify-between">
+    <h1 class="text-3xl font-bold">Wishlist</h1>
+    <%= link_to "Back to dashboard", root_path, class: "text-sm text-slate-600" %>
+  </header>
+
+  <%= form_with url: wishlist_searches_path, method: :get, data: { turbo_frame: "wishlist_results" }, class: "flex gap-3" do |form| %>
+    <%= form.text_field :q, placeholder: "Search GameTDB", class: "w-full rounded border-slate-300" %>
+    <%= form.submit "Search", class: "rounded bg-slate-900 px-4 py-2 text-white" %>
+  <% end %>
+
+  <turbo-frame id="wishlist_results"></turbo-frame>
+
+  <section class="space-y-4">
+    <% @wishlist_items.each do |wishlist_item| %>
+      <article class="rounded border border-slate-200 bg-white p-4 shadow-sm">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-lg font-semibold"><%= wishlist_item.game.name %></h2>
+            <p class="text-sm text-slate-500"><%= wishlist_item.game.title_id %> · priority <%= wishlist_item.priority %></p>
+          </div>
+          <% if wishlist_item.owned? %>
+            <span class="rounded bg-emerald-100 px-2 py-1 text-xs font-medium text-emerald-700">Now owned</span>
+          <% end %>
+        </div>
+        <p class="mt-2 text-sm text-slate-600"><%= wishlist_item.notes %></p>
+      </article>
+    <% end %>
+  </section>
+</div>
