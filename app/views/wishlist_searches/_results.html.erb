@@ -1,0 +1,13 @@
+<turbo-frame id="wishlist_results">
+  <div class="space-y-3 rounded border border-slate-200 bg-white p-4 shadow-sm">
+    <% results.each do |result| %>
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3 last:border-b-0 last:pb-0">
+        <div>
+          <p class="font-medium"><%= result.fetch(:name) %></p>
+          <p class="text-sm text-slate-500"><%= result.fetch(:title_id) %> · <%= result.fetch(:region) %></p>
+        </div>
+        <%= button_to "Add #{result.fetch(:name)}", wishlist_items_path(title_id: result.fetch(:title_id)), class: "rounded bg-slate-900 px-3 py-2 text-sm text-white" %>
+      </div>
+    <% end %>
+  </div>
+</turbo-frame>
