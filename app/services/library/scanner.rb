@@ -2,7 +2,7 @@ module Library
   class Scanner
     class NasUnavailable < StandardError; end
 
-    def initialize(nas_path: Rails.root.join("/nas"), extractor: TitleId::Extractor.new, catalog: nil, cover_cache: nil)
+    def initialize(nas_path: Rails.configuration.x.nas_path, extractor: TitleId::Extractor.new, catalog: nil, cover_cache: nil)
       @nas_path = Pathname(nas_path)
       @extractor = extractor
       @catalog = catalog

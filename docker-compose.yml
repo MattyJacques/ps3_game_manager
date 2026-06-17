@@ -1,0 +1,22 @@
+services:
+  app:
+    build: .
+    ports:
+      - "3000:80"
+    environment:
+      RAILS_ENV: production
+      SECRET_KEY_BASE: replace-me
+      RAILS_MASTER_KEY: ${RAILS_MASTER_KEY}
+      NAS_PATH: /nas
+      GAMETDB_REFRESH_HOURS: 24
+    volumes:
+      - ps3_data:/rails/storage
+      - /mnt/ps3:/nas:ro
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/up"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+volumes:
+  ps3_data:

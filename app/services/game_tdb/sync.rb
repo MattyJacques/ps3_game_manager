@@ -3,7 +3,7 @@ require "zip"
 
 module GameTdb
   class Sync
-    def initialize(cache_dir: Rails.root.join("storage", "gametdb"), archive_url: "https://www.gametdb.com/ps3tdb.zip", refresh_hours: 24, fetcher: nil)
+    def initialize(cache_dir: Rails.configuration.x.gametdb_cache_dir, archive_url: Rails.configuration.x.gametdb_archive_url, refresh_hours: Rails.configuration.x.gametdb_refresh_hours, fetcher: nil)
       @cache_dir = Pathname(cache_dir)
       @archive_url = archive_url
       @refresh_hours = refresh_hours

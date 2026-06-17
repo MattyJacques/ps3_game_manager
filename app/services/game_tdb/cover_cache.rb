@@ -2,7 +2,7 @@ require "net/http"
 
 module GameTdb
   class CoverCache
-    def initialize(cache_dir: Rails.root.join("storage", "covers"), fetcher: nil)
+    def initialize(cache_dir: Rails.configuration.x.cover_cache_dir, fetcher: nil)
       @cache_dir = Pathname(cache_dir)
       @fetcher = fetcher || method(:default_fetch)
     end
