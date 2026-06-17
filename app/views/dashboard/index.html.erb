@@ -1,16 +1,26 @@
+<%= turbo_stream_from "scan_status" %>
+
 <div class="mx-auto flex max-w-5xl flex-col gap-6 px-4 py-8">
   <header class="flex items-center justify-between">
     <div>
       <h1 class="text-3xl font-bold">PS3 Game Manager</h1>
       <p class="text-slate-600">Track owned games, missing files, and wishlist matches from one NAS scan.</p>
     </div>
-    <button class="rounded bg-slate-900 px-4 py-2 text-white" type="button">Scan now</button>
   </header>
 
   <nav class="flex gap-4 text-sm font-medium text-slate-700">
-    <a href="#">Library</a>
-    <a href="#">Wishlist</a>
-    <a href="#">Missing</a>
-    <a href="#">Unidentified</a>
+    <%= link_to "Library", library_index_path %>
+    <%= link_to "Wishlist", wishlist_items_path %>
+    <%= link_to "Missing", missing_media_files_path %>
+    <%= link_to "Unidentified", unidentified_media_files_path %>
   </nav>
+
+  <section class="grid gap-4 md:grid-cols-4">
+    <div class="rounded border border-slate-200 bg-white p-4 shadow-sm"><p class="text-sm text-slate-500">Owned</p><p class="text-2xl font-bold"><%= @owned_count %></p></div>
+    <div class="rounded border border-slate-200 bg-white p-4 shadow-sm"><p class="text-sm text-slate-500">Wishlist</p><p class="text-2xl font-bold"><%= @wishlist_count %></p></div>
+    <div class="rounded border border-slate-200 bg-white p-4 shadow-sm"><p class="text-sm text-slate-500">Missing</p><p class="text-2xl font-bold"><%= @missing_count %></p></div>
+    <div class="rounded border border-slate-200 bg-white p-4 shadow-sm"><p class="text-sm text-slate-500">Unidentified</p><p class="text-2xl font-bold"><%= @unidentified_count %></p></div>
+  </section>
+
+  <%= render "scans/scan_status", scan: @last_scan, current_path: nil, files_processed: 0 %>
 </div>
