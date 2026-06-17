@@ -1,0 +1,17 @@
+<div class="mx-auto max-w-5xl space-y-6 px-4 py-8">
+  <h1 class="text-3xl font-bold">Missing Files</h1>
+
+  <table class="min-w-full border-collapse text-left text-sm">
+    <thead>
+      <tr><th class="border-b px-2 py-2">Path</th><th class="border-b px-2 py-2">Game</th></tr>
+    </thead>
+    <tbody>
+      <% @media_files.each do |media_file| %>
+        <tr>
+          <td class="border-b px-2 py-2"><%= media_file.path %></td>
+          <td class="border-b px-2 py-2"><%= media_file.game&.name || media_file.title_id || "Unknown" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
