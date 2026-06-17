@@ -5,13 +5,13 @@ services:
       - "3000:80"
     environment:
       RAILS_ENV: production
-      SECRET_KEY_BASE: replace-me
-      RAILS_MASTER_KEY: ${RAILS_MASTER_KEY}
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE:?set SECRET_KEY_BASE in .env}
+      RAILS_MASTER_KEY: ${RAILS_MASTER_KEY:?set RAILS_MASTER_KEY in .env}
       NAS_PATH: /nas
       GAMETDB_REFRESH_HOURS: 24
     volumes:
       - ps3_data:/rails/storage
-      - /mnt/ps3:/nas:ro
+      - ${NAS_HOST_PATH:-/mnt/ps3}:/nas:ro
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost/up"]
       interval: 30s
