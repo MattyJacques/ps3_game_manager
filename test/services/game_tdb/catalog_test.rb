@@ -28,7 +28,7 @@ class GameTdbCatalogTest < ActiveSupport::TestCase
       catalog = GameTdb::Catalog.new(xml_path: xml_path)
 
       assert_equal({ title_id: "BLUS30490", name: "God of War III", region: "US", kind: "disc" }, catalog.lookup("BLUS30490"))
-      assert_equal ["Demon's Souls"], catalog.search("souls").map { |entry| entry.fetch(:name) }
+      assert_equal [ "Demon's Souls" ], catalog.search("souls").map { |entry| entry.fetch(:name) }
     end
   end
 end

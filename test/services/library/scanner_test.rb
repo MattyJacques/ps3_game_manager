@@ -7,12 +7,12 @@ class LibraryScannerTest < ActiveSupport::TestCase
     end
   end
 
-  FakeCoverCache = Struct.new(:downloads) do
-    def fetch!(title_id:, region:)
-      downloads << [title_id, region]
-      Pathname("/covers/#{title_id}.jpg")
+    FakeCoverCache = Struct.new(:downloads) do
+      def fetch!(title_id:, region:)
+      downloads << [ title_id, region ]
+        Pathname("/covers/#{title_id}.jpg")
+      end
     end
-  end
 
   test "creates media files, links games, and marks unseen files missing" do
     missing_game = Game.create!(title_id: "BLES00682", name: "Old", region: "EU", kind: "disc")
@@ -39,7 +39,7 @@ class LibraryScannerTest < ActiveSupport::TestCase
 
       assert_equal 2, MediaFile.present_now.count
       assert_equal 1, MediaFile.missing.count
-      assert_equal ["BLES00682", "BLUS30490"], Game.order(:title_id).pluck(:title_id)
+      assert_equal [ "BLES00682", "BLUS30490" ], Game.order(:title_id).pluck(:title_id)
       assert_equal "completed", scan.reload.status
     end
   end

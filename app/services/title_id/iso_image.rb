@@ -41,7 +41,7 @@ module TitleId
         entry = parse_record(data[cursor, length])
         cursor += length
 
-        next if ["", ".", ".."].include?(entry[:name])
+        next if [ "", ".", ".." ].include?(entry[:name])
 
         entries[entry[:name]] = entry
       end
@@ -54,11 +54,12 @@ module TitleId
       size = bytes[10, 4].unpack1("V")
       name_length = bytes.getbyte(32)
       name = bytes[33, name_length]
-      normalized_name = case name
-                        when "\x00" then "."
-                        when "\x01" then ".."
-                        else name.delete("\x00").sub(/;1\z/, "")
-                        end
+      normalized_name =
+        case name
+        when "\x00" then "."
+        when "\x01" then ".."
+        else name.delete("\x00").sub(/;1\z/, "")
+        end
 
       { extent: extent, size: size, name: normalized_name }
     end

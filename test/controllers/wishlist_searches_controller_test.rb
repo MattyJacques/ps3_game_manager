@@ -4,7 +4,7 @@ class WishlistSearchesControllerTest < ActionDispatch::IntegrationTest
   test "returns matching GameTDB results" do
     fake_catalog = Object.new
     fake_catalog.define_singleton_method(:search) do |_query|
-      [{ title_id: "BLUS30490", name: "God of War III", region: "US", kind: "disc" }]
+      [ { title_id: "BLUS30490", name: "God of War III", region: "US", kind: "disc" } ]
     end
 
     original_new = GameTdb::Catalog.method(:new)

@@ -8,6 +8,6 @@ Rails.application.routes.draw do
   resources :missing_media_files, only: :index
   resources :unidentified_media_files, only: :index
   resources :media_file_identifications, only: :update
-  resources :wishlist_items, only: [:index, :create, :update, :destroy]
+  resources :wishlist_items, only: [ :index, :create, :update, :destroy ]
   resources :wishlist_searches, only: :index
 end

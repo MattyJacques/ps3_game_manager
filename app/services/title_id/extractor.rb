@@ -16,7 +16,7 @@ module TitleId
     attr_reader :pkg_header, :iso_image
 
     def filename_match(path)
-      [File.basename(path), File.basename(File.dirname(path))].each do |candidate|
+      [ File.basename(path), File.basename(File.dirname(path)) ].each do |candidate|
         match = candidate.match(SERIAL_REGEX)
         return match[1] if match
       end

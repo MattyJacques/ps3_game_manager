@@ -23,13 +23,13 @@ class TitleIdIsoImageTest < ActiveSupport::TestCase
       keys << key << "\x00"
       data << value << "\x00"
 
-      [key_offset, 0x0204, value.bytesize + 1, value.bytesize + 1, data_offset].pack("vvVVV")
+      [ key_offset, 0x0204, value.bytesize + 1, value.bytesize + 1, data_offset ].pack("vvVVV")
     end.join
 
     key_table_start = 20 + entries.bytesize
     data_table_start = key_table_start + keys.bytesize
 
-    ["\x00PSF", [0x00000101, key_table_start, data_table_start, values.size].pack("VVVV"), entries, keys, data].join
+    [ "\x00PSF", [ 0x00000101, key_table_start, data_table_start, values.size ].pack("VVVV"), entries, keys, data ].join
   end
 
   def build_test_iso(param_sfo_bytes)
@@ -61,10 +61,10 @@ class TitleIdIsoImageTest < ActiveSupport::TestCase
     name_bytes = name.b
     padding = name_bytes.bytesize.even? ? 1 : 0
     length = 33 + name_bytes.bytesize + padding
-    record = [length, 0, extent, extent, size, size].pack("CCVVVV")
+    record = [ length, 0, extent, extent, size, size ].pack("CCVVVV")
     record << ("\x00" * 7)
-    record << [0, 0, 0, 1, 1].pack("CCCvv")
-    record << [name_bytes.bytesize].pack("C")
+    record << [ 0, 0, 0, 1, 1 ].pack("CCCvv")
+    record << [ name_bytes.bytesize ].pack("C")
     record << name_bytes
     record << "\x00" if record.bytesize.odd?
     record.ljust(length, "\x00")

@@ -8,6 +8,6 @@ class GameTest < ActiveSupport::TestCase
     MediaFile.create!(path: "/nas/Wanted.iso", file_format: "iso", byte_size: 1, title_id: owned.title_id, game: owned, present: true, first_seen_at: Time.current, last_seen_at: Time.current)
     MediaFile.create!(path: "/nas/Missing.iso", file_format: "iso", byte_size: 1, title_id: missing.title_id, game: missing, present: false, first_seen_at: Time.current, last_seen_at: Time.current)
 
-    assert_equal [owned], Game.owned.order(:title_id).to_a
+    assert_equal [ owned ], Game.owned.order(:title_id).to_a
   end
 end

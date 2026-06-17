@@ -4,7 +4,7 @@ class WishlistManagementTest < ApplicationSystemTestCase
   test "searching and adding a wishlist entry" do
     fake_catalog = Object.new
     fake_catalog.define_singleton_method(:search) do |_query|
-      [{ title_id: "BLUS30490", name: "God of War III", region: "US", kind: "disc" }]
+      [ { title_id: "BLUS30490", name: "God of War III", region: "US", kind: "disc" } ]
     end
     fake_catalog.define_singleton_method(:lookup) do |_title_id|
       { title_id: "BLUS30490", name: "God of War III", region: "US", kind: "disc" }
